@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controlador.Controlador;
+import vista.Vista;
+
 public class Vista extends JFrame {
 
 	private JPanel contentPane;
@@ -18,6 +21,7 @@ public class Vista extends JFrame {
 			public void run() {
 				try {
 					Vista frame = new Vista();
+					Controlador controlador = new Controlador(frame);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
