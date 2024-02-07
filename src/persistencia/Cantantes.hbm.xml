@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 7 feb 2024 13:02:00 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="censo_europa" name="persistencia.Cantantes" optimistic-lock="none" table="cantantes">
+        <id name="pais" type="string">
+            <column length="20" name="PAIS"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nombre" type="string">
+            <column length="20" name="NOMBRE" not-null="true">
+                <comment>Nombre del cantante</comment>
+            </column>
+        </property>
+        <property name="nombreCancion" type="string">
+            <column length="100" name="NOMBRE_CANCION">
+                <comment>Nombre de la canción que presenta</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
