@@ -8,10 +8,12 @@ import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
 import vista.Vista;
+import javax.swing.JButton;
 
 public class Vista extends JFrame {
 
 	private JPanel contentPane;
+	public JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -40,6 +42,9 @@ public class Vista extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		
+		btnNewButton = new JButton("New button");
+		contentPane.add(btnNewButton);
 	}
 
 }
