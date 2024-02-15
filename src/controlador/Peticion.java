@@ -19,7 +19,7 @@ public class Peticion extends Thread{
 			int aleatorio = (int)(1+Math.random()*100);
 			if (rango.equals("25")) {
 				if (aleatorio < 7) {
-					pais = "España";
+					pais = "Espania";
 				} else if (aleatorio <= 10) {
 					pais = "Alemania";
 				}  else if (aleatorio <= 23) {
@@ -33,7 +33,7 @@ public class Peticion extends Thread{
 				}  else if (aleatorio <= 61) {
 					pais = "Polonia";
 				}  else if (aleatorio <= 88) {
-					pais = "Pises Bajos";
+					pais = "Paises Bajos";
 				}  else if (aleatorio <= 95) {
 					pais = "Rumania";
 				}  else if (aleatorio <= 100) {
@@ -41,7 +41,7 @@ public class Peticion extends Thread{
 				}
 			} else if (rango.equals("40")) {
 				if (aleatorio < 14) {
-					pais = "España";
+					pais = "Espania";
 				} else if (aleatorio <= 20) {
 					pais = "Alemania";
 				}  else if (aleatorio <= 33) {
@@ -55,7 +55,7 @@ public class Peticion extends Thread{
 				}  else if (aleatorio <= 65) {
 					pais = "Polonia";
 				}  else if (aleatorio <= 81) {
-					pais = "Pises Bajos";
+					pais = "Paises Bajos";
 				}  else if (aleatorio <= 90) {
 					pais = "Rumania";
 				}  else if (aleatorio <= 100) {
@@ -63,7 +63,7 @@ public class Peticion extends Thread{
 				}
 			} else if (rango.equals("65")) {
 				if (aleatorio < 5) {
-					pais = "España";
+					pais = "Espania";
 				} else if (aleatorio <= 15) {
 					pais = "Alemania";
 				}  else if (aleatorio <= 27) {
@@ -77,7 +77,7 @@ public class Peticion extends Thread{
 				}  else if (aleatorio <= 61) {
 					pais = "Polonia";
 				}  else if (aleatorio <= 71) {
-					pais = "Pises Bajos";
+					pais = "Paises Bajos";
 				}  else if (aleatorio <= 88) {
 					pais = "Rumania";
 				}  else if (aleatorio <= 100) {
@@ -85,7 +85,7 @@ public class Peticion extends Thread{
 				}
 			} else if (rango.equals("66")) {
 				if (aleatorio < 3) {
-					pais = "España";
+					pais = "Espania";
 				} else if (aleatorio <= 20) {
 					pais = "Alemania";
 				}  else if (aleatorio <= 25) {
@@ -99,14 +99,19 @@ public class Peticion extends Thread{
 				}  else if (aleatorio <= 65) {
 					pais = "Polonia";
 				}  else if (aleatorio <= 76) {
-					pais = "Pises Bajos";
+					pais = "Paises Bajos";
 				}  else if (aleatorio <= 91) {
 					pais = "Rumania";
 				}  else if (aleatorio <= 100) {
 					pais = "Grecia";
 				}
 			}
-		} while(paises.equalsIgnoreCase("pais"));
+			try {
+				sleep(0);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} while(paises.equalsIgnoreCase(pais));
 		return pais;
 	}
 	public void Escuchar() {
@@ -172,5 +177,8 @@ public class Peticion extends Thread{
 				}
 			}
 		}
+	}
+	public void run() {
+		Escuchar();
 	}
 }

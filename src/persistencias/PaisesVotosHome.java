@@ -1,5 +1,5 @@
-package persistencia;
-// Generated 12 feb 2024 16:29:59 by Hibernate Tools 5.4.33.Final
+package persistencias;
+// Generated 14 feb 2024 12:59:15 by Hibernate Tools 5.4.33.Final
 
 import java.util.List;
 import java.util.logging.Level;
@@ -10,13 +10,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class PorcentajesRangoedad.
- * @see persistencia.PorcentajesRangoedad
+ * Home object for domain model class PaisesVotos.
+ * @see persistencias.PaisesVotos
  * @author Hibernate Tools
  */
-public class PorcentajesRangoedadHome {
+public class PaisesVotosHome {
 
-	private static final Logger logger = Logger.getLogger(PorcentajesRangoedadHome.class.getName());
+	private static final Logger logger = Logger.getLogger(PaisesVotosHome.class.getName());
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -29,8 +29,8 @@ public class PorcentajesRangoedadHome {
 		}
 	}
 
-	public void persist(PorcentajesRangoedad transientInstance) {
-		logger.log(Level.INFO, "persisting PorcentajesRangoedad instance");
+	public void persist(PaisesVotos transientInstance) {
+		logger.log(Level.INFO, "persisting PaisesVotos instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			logger.log(Level.INFO, "persist successful");
@@ -40,8 +40,8 @@ public class PorcentajesRangoedadHome {
 		}
 	}
 
-	public void attachDirty(PorcentajesRangoedad instance) {
-		logger.log(Level.INFO, "attaching dirty PorcentajesRangoedad instance");
+	public void attachDirty(PaisesVotos instance) {
+		logger.log(Level.INFO, "attaching dirty PaisesVotos instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			logger.log(Level.INFO, "attach successful");
@@ -51,8 +51,8 @@ public class PorcentajesRangoedadHome {
 		}
 	}
 
-	public void attachClean(PorcentajesRangoedad instance) {
-		logger.log(Level.INFO, "attaching clean PorcentajesRangoedad instance");
+	public void attachClean(PaisesVotos instance) {
+		logger.log(Level.INFO, "attaching clean PaisesVotos instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			logger.log(Level.INFO, "attach successful");
@@ -62,8 +62,8 @@ public class PorcentajesRangoedadHome {
 		}
 	}
 
-	public void delete(PorcentajesRangoedad persistentInstance) {
-		logger.log(Level.INFO, "deleting PorcentajesRangoedad instance");
+	public void delete(PaisesVotos persistentInstance) {
+		logger.log(Level.INFO, "deleting PaisesVotos instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			logger.log(Level.INFO, "delete successful");
@@ -73,11 +73,10 @@ public class PorcentajesRangoedadHome {
 		}
 	}
 
-	public PorcentajesRangoedad merge(PorcentajesRangoedad detachedInstance) {
-		logger.log(Level.INFO, "merging PorcentajesRangoedad instance");
+	public PaisesVotos merge(PaisesVotos detachedInstance) {
+		logger.log(Level.INFO, "merging PaisesVotos instance");
 		try {
-			PorcentajesRangoedad result = (PorcentajesRangoedad) sessionFactory.getCurrentSession()
-					.merge(detachedInstance);
+			PaisesVotos result = (PaisesVotos) sessionFactory.getCurrentSession().merge(detachedInstance);
 			logger.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -86,11 +85,11 @@ public class PorcentajesRangoedadHome {
 		}
 	}
 
-	public PorcentajesRangoedad findById(java.lang.String id) {
-		logger.log(Level.INFO, "getting PorcentajesRangoedad instance with id: " + id);
+	public PaisesVotos findById(java.lang.String id) {
+		logger.log(Level.INFO, "getting PaisesVotos instance with id: " + id);
 		try {
-			PorcentajesRangoedad instance = (PorcentajesRangoedad) sessionFactory.getCurrentSession()
-					.get("persistencia.PorcentajesRangoedad", id);
+			PaisesVotos instance = (PaisesVotos) sessionFactory.getCurrentSession().get("persistencias.PaisesVotos",
+					id);
 			if (instance == null) {
 				logger.log(Level.INFO, "get successful, no instance found");
 			} else {
@@ -103,10 +102,10 @@ public class PorcentajesRangoedadHome {
 		}
 	}
 
-	public List findByExample(PorcentajesRangoedad instance) {
-		logger.log(Level.INFO, "finding PorcentajesRangoedad instance by example");
+	public List findByExample(PaisesVotos instance) {
+		logger.log(Level.INFO, "finding PaisesVotos instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession().createCriteria("persistencia.PorcentajesRangoedad")
+			List results = sessionFactory.getCurrentSession().createCriteria("persistencias.PaisesVotos")
 					.add(Example.create(instance)).list();
 			logger.log(Level.INFO, "find by example successful, result size: " + results.size());
 			return results;

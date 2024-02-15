@@ -13,8 +13,8 @@
 		<property name="hibernate.validator.apply_to_ddl">false</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
-		<mapping  resource="persistencia/PaisesVotos.hbm.xml"/>
-        <mapping  resource="persistencia/Cantantes.hbm.xml"/>
-        <mapping  resource="persistencia/PorcentajesRangoedad.hbm.xml"/>
+        <mapping class="persistencias.Cantantes"/>
+        <mapping class="persistencias.PaisesVotos"/>
+        <mapping class="persistencias.PorcentajesRangoedad"/>
     </session-factory>
 </hibernate-configuration>

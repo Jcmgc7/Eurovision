@@ -1,4 +1,4 @@
-package persistencia;
+package persistencias;
 
 public class Paises_Votos {
 	public String nombre;

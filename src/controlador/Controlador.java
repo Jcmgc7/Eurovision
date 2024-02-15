@@ -22,33 +22,79 @@ import java.util.Comparator;
 import java.util.List;
 
 import vista.Vista;
-import persistencia.PaisesVotos;
-import persistencia.Paises_Votos;
-import persistencia.PorcentajesRangoedad;
+import persistencias.PorcentajesRangoedad;
+import persistencias.Votos_Cantantes;
+import persistencias.PaisesVotos;
+import persistencias.Paises_Votos;
 
 @SuppressWarnings("deprecation")
 public class Controlador implements ActionListener{
 	Vista vista = new Vista();
 	ArrayList<Paises_Votos> PV = new ArrayList();
+	ArrayList<Votos_Cantantes> VC = new ArrayList();
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == this.vista.btnNewButton) {
-			SessionFactory SF = null;
-			try {
+		SessionFactory SF = null;
+		try {
 				Controlador helper = new Controlador(vista);
 				Configuration configuration = new Configuration();
 				configuration.configure("hibernate.cfg.xml");
 				SF = configuration.buildSessionFactory();
+			if (e.getSource() == this.vista.votos) {
 				helper.consultaPais(SF);
-				
-			} catch (Exception e1) {
-				e1.printStackTrace();
+			} 
+			if (e.getSource() == this.vista.ganador) {
+				helper.sacarGnador(SF);
 			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 	}
 	public Controlador(Vista frame) {
 		vista=frame;
-		this.vista.btnNewButton.addActionListener(this);
+		this.vista.votos.addActionListener(this);
+		this.vista.ganador.addActionListener(this);
+	}
+	public void sacarGnador(SessionFactory SF) {
+		Session sesion = null;
+		try {
+			rellenarCantantes();
+			sesion = SF.getCurrentSession();
+			sesion.beginTransaction();
+			Query query = sesion.createQuery("FROM PaisesVotos");
+			List<PaisesVotos> PV2 = query.list();
+			for (int i = 0; i < PV2.size(); i++) {
+				for (int j = 0; j < VC.size(); j++) {
+					if (PV2.get(i).getPrimerPuesto().equalsIgnoreCase(VC.get(j).getPais())) {
+						VC.get(j).setVotos(VC.get(j).getVotos() + 15);
+					}
+					if (PV2.get(i).getSegundoPuesto().equalsIgnoreCase(VC.get(j).getPais())) {
+						VC.get(j).setVotos(VC.get(j).getVotos() + 10);
+					}
+					if (PV2.get(i).getTerceroPuesto().equalsIgnoreCase(VC.get(j).getPais())) {
+						VC.get(j).setVotos(VC.get(j).getVotos() + 8);
+					}
+				}
+			}
+			Collections.sort(VC, Comparator.comparingInt(Votos_Cantantes::getVotos).reversed());
+			for (int j = 0; j < VC.size(); j++) {
+				System.out.println(VC.get(j).toString());
+			}
+			sesion.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (sesion != null) {
+				sesion.getTransaction().rollback();
+			}
+		} finally {
+			if (sesion == null) {
+				try {
+					sesion.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		}
 	}
 	public void consultaPais(SessionFactory SF) {
 		Session sesion = null;
@@ -56,50 +102,37 @@ public class Controlador implements ActionListener{
 		int votos;
 		String paisvoto;
 		try {
-			InetSocketAddress direcion = new InetSocketAddress("loclahost", 9876);
+			InetSocketAddress direcion = new InetSocketAddress("localhost", 9876);
 			sesion = SF.getCurrentSession();
 			sesion.beginTransaction();
 			Query query = sesion.createQuery("FROM PorcentajesRangoedad");
 			List<PorcentajesRangoedad> PR = query.list();
+			rellenar();
 			for (int i = 0; i < PR.size(); i++) {
-				rellenar();
 				votantes = PR.get(i).getRango1825();
 				votos = (PR.get(i).getTotalHabitantes() * votantes/100)/500000;
-				paisvoto = votantes(PR, i, votos, "25");
-				for (int j = 0; j < PV.size(); j++) {
-					if (PV.get(j).getNombre().equalsIgnoreCase(paisvoto)) {
-						PV.get(j).setVotos(PV.get(j).getVotos()+1);
-					}
-				}
+				votantes(PR.get(i).getNombrePais(), votos, "25");
 				votantes = PR.get(i).getRango2640();
 				votos = (PR.get(i).getTotalHabitantes() * votantes/100)/500000;
-				paisvoto = votantes(PR, i, votos, "40");
-				for (int j = 0; j < PV.size(); j++) {
-					if (PV.get(j).getNombre().equalsIgnoreCase(paisvoto)) {
-						PV.get(j).setVotos(PV.get(j).getVotos()+1);
-					}
-				}
+				votantes(PR.get(i).getNombrePais(), votos, "40");
 				votantes = PR.get(i).getRango4165();
 				votos = (PR.get(i).getTotalHabitantes() * votantes/100)/500000;
-				paisvoto = votantes(PR, i, votos, "65");
-				for (int j = 0; j < PV.size(); j++) {
-					if (PV.get(j).getNombre().equalsIgnoreCase(paisvoto)) {
-						PV.get(j).setVotos(PV.get(j).getVotos()+1);
-					}
-				}
+				votantes(PR.get(i).getNombrePais(), votos, "65");
 				votantes = PR.get(i).getRangoMas66();
 				votos = (PR.get(i).getTotalHabitantes() * votantes/100)/500000;
-				paisvoto = votantes(PR, i, votos, "66");
-				for (int j = 0; j < PV.size(); j++) {
-					if (PV.get(j).getNombre().equalsIgnoreCase(paisvoto)) {
-						PV.get(j).setVotos(PV.get(j).getVotos()+1);
-					}
-				}
+				votantes(PR.get(i).getNombrePais(), votos, "66");
 				Collections.sort(PV, Comparator.comparingInt(Paises_Votos::getVotos).reversed());
+				PaisesVotos pv = new PaisesVotos();
+				pv.setPais(PR.get(i).getNombrePais());
+				pv.setPrimerPuesto(PV.get(0).getNombre());
+				pv.setSegundoPuesto(PV.get(1).getNombre());
+				pv.setTerceroPuesto(PV.get(2).getNombre());
+				sesion.saveOrUpdate(pv);
 				for (int j = 0; j < PV.size(); j++) {
-					System.out.println(PV.get(i).toString());
+					PV.get(j).setVotos(0);
 				}
 			}
+			sesion.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			sesion.getTransaction().rollback();
@@ -113,33 +146,50 @@ public class Controlador implements ActionListener{
 			}
 		}
 	}
-	private String votantes(List<PorcentajesRangoedad> PR, int i, int votos, String rango) throws IOException {
+	private void votantes(String nombre, int votos, String rango) throws IOException {
 		InetSocketAddress direcion;
 		String pais = "";
-		for (int j = 0; j < votos; j++) {
-			direcion = new InetSocketAddress("loclahost", 9876);
+		for (int i = 0; i < votos; i++) {
+			direcion = new InetSocketAddress("localhost", 9876);
 			Socket socket = new Socket();
 			socket.connect(direcion);
 			PrintWriter PW = new PrintWriter(socket.getOutputStream());
-			PW.write(PR.get(i).getNombrePais() + "\n");
+			PW.write(nombre + "\n");
 			PW.write(rango + "\n");
 			PW.flush();
 			InputStreamReader ISR = new InputStreamReader(socket.getInputStream());
 			BufferedReader BR = new BufferedReader(ISR);
 			pais = BR.readLine();
+			for (int j = 0; j < PV.size(); j++) {
+				if (PV.get(j).getNombre().equalsIgnoreCase(pais)) {
+					PV.get(j).setVotos(PV.get(j).getVotos()+1);
+				}
+			}
 		}
-		return pais;
 	}
 	public void rellenar() {
-		PV.add( new Paises_Votos("España", 0));
+		PV.add( new Paises_Votos("Espania", 0));
 		PV.add( new Paises_Votos("Alemania", 0));
 		PV.add( new Paises_Votos("Francia", 0));
 		PV.add( new Paises_Votos("Italia", 0));
 		PV.add( new Paises_Votos("Portugal", 0));
 		PV.add( new Paises_Votos("Reino Unido", 0));
 		PV.add( new Paises_Votos("Polonia", 0));
-		PV.add( new Paises_Votos("Países Bajos", 0));
-		PV.add( new Paises_Votos("Rumanía", 0));
+		PV.add( new Paises_Votos("Paises Bajos", 0));
+		PV.add( new Paises_Votos("Rumania", 0));
 		PV.add( new Paises_Votos("Grecia", 0));
 	}
+	public void rellenarCantantes() {
+		VC.add(new Votos_Cantantes("Joen", "Espania", 0));
+		VC.add(new Votos_Cantantes("Hilda", "Alemania", 0));
+		VC.add(new Votos_Cantantes("Bastian", "Francia", 0));
+		VC.add(new Votos_Cantantes("Gianmarco", "Italia", 0));
+		VC.add(new Votos_Cantantes("Matilde", "Portugal", 0));
+		VC.add(new Votos_Cantantes("Hanna", "Reino Unido", 0));
+		VC.add(new Votos_Cantantes("Anka", "Polonia", 0));
+		VC.add(new Votos_Cantantes("Dennis", "Paises Bajos", 0));
+		VC.add(new Votos_Cantantes("Amalia", "Rumania", 0));
+		VC.add(new Votos_Cantantes("Orelle", "Grecia", 0));
+	}
+	
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 12 feb 2024 16:29:59 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 feb 2024 12:59:15 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class catalog="censo_europa" name="persistencia.PorcentajesRangoedad" optimistic-lock="none" table="porcentajes_rangoedad">
+    <class catalog="censo_europa" name="persistencias.PorcentajesRangoedad" optimistic-lock="none" table="porcentajes_rangoedad">
         <id name="nombrePais" type="string">
             <column length="30" name="NOMBRE_PAIS"/>
             <generator class="assigned"/>

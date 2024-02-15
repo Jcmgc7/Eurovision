@@ -9,11 +9,14 @@ import javax.swing.border.EmptyBorder;
 import controlador.Controlador;
 import vista.Vista;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Vista extends JFrame {
 
 	private JPanel contentPane;
-	public JButton btnNewButton;
+	public JButton votos;
+	public JButton ganador;
 
 	/**
 	 * Launch the application.
@@ -42,9 +45,14 @@ public class Vista extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		btnNewButton = new JButton("New button");
-		contentPane.add(btnNewButton);
+		votos = new JButton("New button");
+		votos.setBounds(172, 10, 89, 23);
+		contentPane.add(votos);
+		
+		ganador = new JButton("New button");
+		ganador.setBounds(172, 83, 89, 23);
+		contentPane.add(ganador);
 	}
-
 }

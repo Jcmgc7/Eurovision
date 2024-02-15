@@ -1,5 +1,5 @@
-package persistencia;
-// Generated 12 feb 2024 16:29:59 by Hibernate Tools 5.4.33.Final
+package persistencias;
+// Generated 14 feb 2024 12:59:15 by Hibernate Tools 5.4.33.Final
 
 import java.util.List;
 import java.util.logging.Level;
@@ -10,13 +10,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class Cantantes.
- * @see persistencia.Cantantes
+ * Home object for domain model class PorcentajesRangoedad.
+ * @see persistencias.PorcentajesRangoedad
  * @author Hibernate Tools
  */
-public class CantantesHome {
+public class PorcentajesRangoedadHome {
 
-	private static final Logger logger = Logger.getLogger(CantantesHome.class.getName());
+	private static final Logger logger = Logger.getLogger(PorcentajesRangoedadHome.class.getName());
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -29,8 +29,8 @@ public class CantantesHome {
 		}
 	}
 
-	public void persist(Cantantes transientInstance) {
-		logger.log(Level.INFO, "persisting Cantantes instance");
+	public void persist(PorcentajesRangoedad transientInstance) {
+		logger.log(Level.INFO, "persisting PorcentajesRangoedad instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			logger.log(Level.INFO, "persist successful");
@@ -40,8 +40,8 @@ public class CantantesHome {
 		}
 	}
 
-	public void attachDirty(Cantantes instance) {
-		logger.log(Level.INFO, "attaching dirty Cantantes instance");
+	public void attachDirty(PorcentajesRangoedad instance) {
+		logger.log(Level.INFO, "attaching dirty PorcentajesRangoedad instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			logger.log(Level.INFO, "attach successful");
@@ -51,8 +51,8 @@ public class CantantesHome {
 		}
 	}
 
-	public void attachClean(Cantantes instance) {
-		logger.log(Level.INFO, "attaching clean Cantantes instance");
+	public void attachClean(PorcentajesRangoedad instance) {
+		logger.log(Level.INFO, "attaching clean PorcentajesRangoedad instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			logger.log(Level.INFO, "attach successful");
@@ -62,8 +62,8 @@ public class CantantesHome {
 		}
 	}
 
-	public void delete(Cantantes persistentInstance) {
-		logger.log(Level.INFO, "deleting Cantantes instance");
+	public void delete(PorcentajesRangoedad persistentInstance) {
+		logger.log(Level.INFO, "deleting PorcentajesRangoedad instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			logger.log(Level.INFO, "delete successful");
@@ -73,10 +73,11 @@ public class CantantesHome {
 		}
 	}
 
-	public Cantantes merge(Cantantes detachedInstance) {
-		logger.log(Level.INFO, "merging Cantantes instance");
+	public PorcentajesRangoedad merge(PorcentajesRangoedad detachedInstance) {
+		logger.log(Level.INFO, "merging PorcentajesRangoedad instance");
 		try {
-			Cantantes result = (Cantantes) sessionFactory.getCurrentSession().merge(detachedInstance);
+			PorcentajesRangoedad result = (PorcentajesRangoedad) sessionFactory.getCurrentSession()
+					.merge(detachedInstance);
 			logger.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -85,10 +86,11 @@ public class CantantesHome {
 		}
 	}
 
-	public Cantantes findById(java.lang.String id) {
-		logger.log(Level.INFO, "getting Cantantes instance with id: " + id);
+	public PorcentajesRangoedad findById(java.lang.String id) {
+		logger.log(Level.INFO, "getting PorcentajesRangoedad instance with id: " + id);
 		try {
-			Cantantes instance = (Cantantes) sessionFactory.getCurrentSession().get("persistencia.Cantantes", id);
+			PorcentajesRangoedad instance = (PorcentajesRangoedad) sessionFactory.getCurrentSession()
+					.get("persistencias.PorcentajesRangoedad", id);
 			if (instance == null) {
 				logger.log(Level.INFO, "get successful, no instance found");
 			} else {
@@ -101,10 +103,10 @@ public class CantantesHome {
 		}
 	}
 
-	public List findByExample(Cantantes instance) {
-		logger.log(Level.INFO, "finding Cantantes instance by example");
+	public List findByExample(PorcentajesRangoedad instance) {
+		logger.log(Level.INFO, "finding PorcentajesRangoedad instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession().createCriteria("persistencia.Cantantes")
+			List results = sessionFactory.getCurrentSession().createCriteria("persistencias.PorcentajesRangoedad")
 					.add(Example.create(instance)).list();
 			logger.log(Level.INFO, "find by example successful, result size: " + results.size());
 			return results;

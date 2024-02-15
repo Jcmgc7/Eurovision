@@ -1,5 +1,5 @@
-package persistencia;
-// Generated 12 feb 2024 16:29:59 by Hibernate Tools 5.4.33.Final
+package persistencias;
+// Generated 14 feb 2024 12:59:15 by Hibernate Tools 5.4.33.Final
 
 import java.util.List;
 import java.util.logging.Level;
@@ -10,13 +10,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class PaisesVotos.
- * @see persistencia.PaisesVotos
+ * Home object for domain model class Cantantes.
+ * @see persistencias.Cantantes
  * @author Hibernate Tools
  */
-public class PaisesVotosHome {
+public class CantantesHome {
 
-	private static final Logger logger = Logger.getLogger(PaisesVotosHome.class.getName());
+	private static final Logger logger = Logger.getLogger(CantantesHome.class.getName());
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -29,8 +29,8 @@ public class PaisesVotosHome {
 		}
 	}
 
-	public void persist(PaisesVotos transientInstance) {
-		logger.log(Level.INFO, "persisting PaisesVotos instance");
+	public void persist(Cantantes transientInstance) {
+		logger.log(Level.INFO, "persisting Cantantes instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			logger.log(Level.INFO, "persist successful");
@@ -40,8 +40,8 @@ public class PaisesVotosHome {
 		}
 	}
 
-	public void attachDirty(PaisesVotos instance) {
-		logger.log(Level.INFO, "attaching dirty PaisesVotos instance");
+	public void attachDirty(Cantantes instance) {
+		logger.log(Level.INFO, "attaching dirty Cantantes instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			logger.log(Level.INFO, "attach successful");
@@ -51,8 +51,8 @@ public class PaisesVotosHome {
 		}
 	}
 
-	public void attachClean(PaisesVotos instance) {
-		logger.log(Level.INFO, "attaching clean PaisesVotos instance");
+	public void attachClean(Cantantes instance) {
+		logger.log(Level.INFO, "attaching clean Cantantes instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			logger.log(Level.INFO, "attach successful");
@@ -62,8 +62,8 @@ public class PaisesVotosHome {
 		}
 	}
 
-	public void delete(PaisesVotos persistentInstance) {
-		logger.log(Level.INFO, "deleting PaisesVotos instance");
+	public void delete(Cantantes persistentInstance) {
+		logger.log(Level.INFO, "deleting Cantantes instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			logger.log(Level.INFO, "delete successful");
@@ -73,10 +73,10 @@ public class PaisesVotosHome {
 		}
 	}
 
-	public PaisesVotos merge(PaisesVotos detachedInstance) {
-		logger.log(Level.INFO, "merging PaisesVotos instance");
+	public Cantantes merge(Cantantes detachedInstance) {
+		logger.log(Level.INFO, "merging Cantantes instance");
 		try {
-			PaisesVotos result = (PaisesVotos) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Cantantes result = (Cantantes) sessionFactory.getCurrentSession().merge(detachedInstance);
 			logger.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -85,10 +85,10 @@ public class PaisesVotosHome {
 		}
 	}
 
-	public PaisesVotos findById(java.lang.String id) {
-		logger.log(Level.INFO, "getting PaisesVotos instance with id: " + id);
+	public Cantantes findById(java.lang.String id) {
+		logger.log(Level.INFO, "getting Cantantes instance with id: " + id);
 		try {
-			PaisesVotos instance = (PaisesVotos) sessionFactory.getCurrentSession().get("persistencia.PaisesVotos", id);
+			Cantantes instance = (Cantantes) sessionFactory.getCurrentSession().get("persistencias.Cantantes", id);
 			if (instance == null) {
 				logger.log(Level.INFO, "get successful, no instance found");
 			} else {
@@ -101,10 +101,10 @@ public class PaisesVotosHome {
 		}
 	}
 
-	public List findByExample(PaisesVotos instance) {
-		logger.log(Level.INFO, "finding PaisesVotos instance by example");
+	public List findByExample(Cantantes instance) {
+		logger.log(Level.INFO, "finding Cantantes instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession().createCriteria("persistencia.PaisesVotos")
+			List results = sessionFactory.getCurrentSession().createCriteria("persistencias.Cantantes")
 					.add(Example.create(instance)).list();
 			logger.log(Level.INFO, "find by example successful, result size: " + results.size());
 			return results;
