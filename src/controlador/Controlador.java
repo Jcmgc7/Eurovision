@@ -80,6 +80,7 @@ public class Controlador implements ActionListener{
 			for (int j = 0; j < VC.size(); j++) {
 				System.out.println(VC.get(j).toString());
 			}
+			System.out.println(1);
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
